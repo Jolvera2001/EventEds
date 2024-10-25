@@ -4,5 +4,18 @@
     build:
       context: .
       dockerfile: EventEdsServer/Dockerfile
+    environment:
+      - MONGO_URI=${MONGO_URI}
   mongodb:
-    image: mongo:latest
+    image: mongodb/mongodb-community-server:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD-${MONGO_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      
+volumes:
+  mongodb_data:
