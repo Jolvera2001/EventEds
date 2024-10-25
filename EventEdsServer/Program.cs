@@ -1,11 +1,13 @@
 using dotenv.net;
 using EventEdsServer.Repository;
+using EventEdsServer.Repository.Crud;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 DotEnv.Load();
 
+// db context
 builder.Services.AddDbContext<MongoContext>(options =>
 {
     var mongoUri = Environment.GetEnvironmentVariable("MONGO_URI");
@@ -23,6 +25,11 @@ builder.Services.AddDbContext<MongoContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// crud
+builder.Services.AddScoped<IStedsEventCrud, StedsStedsEventCrud>();
+
+// services
 
 var app = builder.Build();
 

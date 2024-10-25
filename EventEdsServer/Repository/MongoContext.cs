@@ -7,7 +7,7 @@ namespace EventEdsServer.Repository;
 
 public class MongoContext : DbContext
 {
-    public DbSet<Event> Events { get; set; }
+    public DbSet<StedsEvent> Events { get; set; }
     
     public static MongoContext Create(IMongoDatabase database) =>
         new(new DbContextOptionsBuilder<MongoContext>()
@@ -19,7 +19,7 @@ public class MongoContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Event>().ToCollection("Events");
+        modelBuilder.Entity<StedsEvent>().ToCollection("Events");
         
     }
 }

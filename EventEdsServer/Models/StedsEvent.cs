@@ -4,7 +4,7 @@ using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace EventEdsServer.Models;
 
-public class Event
+public class StedsEvent
 {
     [BsonId]
     public ObjectId Id { get; set; }
