@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace EventEdsServer.Models;
 
@@ -19,4 +20,7 @@ public class Event
     
     [BsonElement("end_date")]
     public DateTime EndDate { get; set; } 
+    
+    [BsonElement("location")]
+    public GeoJsonPoint<GeoJson2DGeographicCoordinates> Location { get; set; }
 }
