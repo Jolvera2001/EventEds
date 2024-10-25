@@ -1,0 +1,8 @@
+﻿services:
+  eventedsserver:
+    image: eventedsserver
+    build:
+      context: .
+      dockerfile: EventEdsServer/Dockerfile
+  mongodb:
+    image: mongo:latest
