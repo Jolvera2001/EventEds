@@ -25,7 +25,7 @@ public class StedsEventService : IStedsEventService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex.Message);
+            _logger.LogError("Failed to fetch all events: " + ex.Message);
             throw;
         }
     }
@@ -45,7 +45,7 @@ public class StedsEventService : IStedsEventService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex.Message);
+            _logger.LogError("Failed to get event by id: " + ex.Message);
             throw;
         }
     }
@@ -76,18 +76,42 @@ public class StedsEventService : IStedsEventService
         }
         catch (Exception ex)
         {
-           _logger.LogError(ex.Message);
+           _logger.LogError("Failed to create a new event: " + ex.Message);
            throw;
         }
     }
 
-    public async Task<StedsEvent?> UpdateStedsEvent(StedsEventDto stedsEvent)
+    public async Task<StedsEvent?> UpdateStedsEvent(StedsEvent stedsEvent)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _logger.LogInformation("Updating event");
+            var result = await _eventCrud.UpdateEventAsync(stedsEvent);
+            if (result == null)
+            {
+                return null;
+            }
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("Failed to update event: " + ex.Message);
+            throw;
+        }
     }
 
     public async Task DeleteStedsEvent(ObjectId id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _logger.LogInformation("Deleting event");
+            var result = await _eventCrud.DeleteEventAsync(id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("Failed to delete event: " + ex.Message);
+            throw;
+        }
     }
 }
