@@ -1,8 +1,18 @@
 import {App} from "vue";
 import Button from "primevue/button";
 import DatePicker from "primevue/datepicker";
+import Card from 'primevue/card'
+import InputGroup from 'primevue/inputgroup';
+import InputGroupAddon from 'primevue/inputgroupaddon';
+import InputText from 'primevue/inputtext';
+
+
 
 export default function registerComponents(app: App) {
     app.component('Button', Button);
-    app.component('DatePicker', DatePicker)
+    app.component('DatePicker', DatePicker);
+    app.component('Card', Card);
+    app.component('InputGroup', InputGroup);
+    app.component('InputGroupAddon', InputGroupAddon);
+    app.component('InputText', InputText);
 }
