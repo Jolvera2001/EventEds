@@ -5,6 +5,9 @@ import Card from 'primevue/card'
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 import InputText from 'primevue/inputtext';
+import FloatLabel from 'primevue/floatlabel';
+import Textarea from 'primevue/textarea';
+
 
 
 
@@ -15,4 +18,6 @@ export default function registerComponents(app: App) {
     app.component('InputGroup', InputGroup);
     app.component('InputGroupAddon', InputGroupAddon);
     app.component('InputText', InputText);
+    app.component('FloatLabel', FloatLabel);
+    app.component('Textarea', Textarea);
 }
