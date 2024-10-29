@@ -17,6 +17,17 @@ interface EventData {
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
 const mapContainer = ref(null)
+const createSquareBounds = (centerLng: number, centerLat: number, sideLength: number) => {
+  const degreeLength = sideLength / 111
+  
+  return {
+    north: centerLat + (degreeLength / 2),
+    south: centerLat - (degreeLength / 2),
+    east: centerLng + (degreeLength / 2),
+    west: centerLng - (degreeLength / 2)
+  };
+};
+
 let map = null
 let marker = null
 
@@ -39,12 +50,18 @@ onMounted(() => {
   
   
   mapboxgl.accessToken = MAPBOX_TOKEN
+  const center = [-97.753, 30.229]
+  const boundaryBox = createSquareBounds(center[0], center[1], 2);
   
   map = new mapboxgl.Map({
     container: mapContainer.value,
     style: 'mapbox://styles/mapbox/streets-v11',
-    center: [-74.5, 40],
-    zoom: 9
+    center: [-97.753, 30.229],
+    zoom: 16,
+    maxBounds: [
+        [boundaryBox.west, boundaryBox.south],
+        [boundaryBox.east, boundaryBox.north],
+    ]
   })
   
   // add click handler
