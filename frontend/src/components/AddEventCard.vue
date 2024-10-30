@@ -135,6 +135,8 @@ const handleSubmit = async () => {
             id="eventDesc" 
             variant="filled"   
             cols="26"
+            rows="5"
+            autoresize
             v-model="eventData.description"
         />
         <label for="eventDate" >Date and Time</label>
