@@ -63,7 +63,7 @@ public class StedsEventService : IStedsEventService
                 Description = stedsEvent.Description,
                 StartDate = stedsEvent.StartDate,
                 EndDate = stedsEvent.EndDate,
-                Location = stedsEvent.Location
+                Location = stedsEvent.ToLocation()
             };
             var result = await _eventCrud.CreateEventAsync(newEvent);
 

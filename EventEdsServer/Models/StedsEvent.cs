@@ -41,8 +41,24 @@ public class StedsEventDto
     public DateTime StartDate { get; set; }
     
     [Required]
-    public DateTime EndDate { get; set; } 
-    
-    [Required]
-    public GeoJsonPoint<GeoJson2DGeographicCoordinates> Location { get; set; }
+    public DateTime EndDate { get; set; }
+
+    [Required] 
+    public LocationDto Location { get; set; } = null!;
+
+    public GeoJsonPoint<GeoJson2DGeographicCoordinates> ToLocation()
+    {
+        return new GeoJsonPoint<GeoJson2DGeographicCoordinates>(
+            new GeoJson2DGeographicCoordinates(
+                Location.Coordinates[0],
+                Location.Coordinates[1]
+                )
+            );
+    }
+}
+
+public class LocationDto
+{
+    public string Type { get; set; } = "Point";
+    public double[] Coordinates { get; set; } = null!;
 }

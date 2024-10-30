@@ -44,6 +44,7 @@ public class StedsEventController : ControllerBase
     public async Task<IActionResult> AddStedsEvent(StedsEventDto stedsEvent)
     {
         _logger.LogInformation($"Add StedsEvent {stedsEvent}");
+        
         var createdEvent = await _stedsEventService.CreateStedsEvent(stedsEvent);
 
         if (createdEvent == null)

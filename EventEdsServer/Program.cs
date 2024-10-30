@@ -11,7 +11,7 @@ DotEnv.Load();
 
 // db context
 var mongoUri = Environment.GetEnvironmentVariable("MONGO_URI");
-if (mongoUri == null)
+if (string.IsNullOrEmpty(mongoUri))
 {
     Console.WriteLine("MongoDB Uri not set!");
     Environment.Exit(0);
