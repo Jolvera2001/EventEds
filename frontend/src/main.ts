@@ -4,7 +4,7 @@ import Aura from '@primevue/themes/aura'
 import App from './App.vue'
 import './index.css'
 import registerComponents from './plugins/PrimeVueInstall'
-
+import router from './router/router'
 
 const app = createApp(App);
 app.use(PrimeVue, {
@@ -15,5 +15,5 @@ app.use(PrimeVue, {
 });
 
 registerComponents(app);
-
+app.use(router)
 app.mount('#app');
