@@ -10,21 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 DotEnv.Load();
 
 // db context
-builder.Services.AddDbContext<MongoContext>(options =>
+var mongoUri = Environment.GetEnvironmentVariable("MONGO_URI");
+if (mongoUri == null)
 {
-    var mongoUri = Environment.GetEnvironmentVariable("MONGO_URI");
-    if (mongoUri == null)
-    {
-        Console.WriteLine("MongoDB Uri not set!");
-        Environment.Exit(0);
-    }
-    
-    var mongoUrl = new MongoUrl(mongoUri);
-    var client = new MongoClient(mongoUri);
-    var database = client.GetDatabase(mongoUrl.DatabaseName ?? "main");
-    
-    options.UseMongoDB(client, database.DatabaseNamespace.DatabaseName);
-});
+    Console.WriteLine("MongoDB Uri not set!");
+    Environment.Exit(0);
+}
+
+var settings = MongoClientSettings.FromUrl(new MongoUrl(mongoUri));
+builder.Services.AddSingleton<IMongoClient>(new MongoClient(settings));
 
 // CORS for local development
 builder.Services.AddCors(options =>
