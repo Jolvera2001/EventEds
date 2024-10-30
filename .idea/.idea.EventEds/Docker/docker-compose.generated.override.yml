@@ -2,7 +2,7 @@
 services:
   eventedsserver:
     build:
-      context: "C:\\Users\\admin\\Documents\\GitHub\\EventEds"
+      context: "C:\\Users\\canno\\RiderProjects\\EventEds"
       dockerfile: "EventEdsServer/Dockerfile"
       target: "base"
     command: []
@@ -15,7 +15,7 @@ services:
     image: "eventedsserver:dev"
     ports: []
     volumes:
-    - "C:\\Users\\admin\\.nuget\\packages:/home/app/.nuget/packages"
-    - "C:\\Users\\admin\\Documents\\GitHub\\EventEds\\EventEdsServer:/app:rw"
-    - "C:\\Users\\admin\\Documents\\GitHub\\EventEds:/src:rw"
+    - "C:\\Users\\canno\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\canno\\RiderProjects\\EventEds\\EventEdsServer:/app:rw"
+    - "C:\\Users\\canno\\RiderProjects\\EventEds:/src:rw"
     working_dir: "/app"
