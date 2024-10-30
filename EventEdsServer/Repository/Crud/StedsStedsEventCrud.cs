@@ -14,7 +14,7 @@ public class StedsStedsEventCrud(IMongoClient mongoClient) : IStedsEventCrud
         return await _events.Find(_ => true).ToListAsync();
     }
 
-    public async Task<StedsEvent?> GetEventByIdAsync(ObjectId id)
+    public async Task<StedsEvent?> GetEventByIdAsync(string id)
     {
         return await _events.Find(e => e.Id == id).FirstOrDefaultAsync();
     }
@@ -31,7 +31,7 @@ public class StedsStedsEventCrud(IMongoClient mongoClient) : IStedsEventCrud
         return result.ModifiedCount > 0 ? updatedStedsEvent : null;
     }
 
-    public async Task<bool> DeleteEventAsync(ObjectId id)
+    public async Task<bool> DeleteEventAsync(string id)
     {
         var result = await _events.DeleteOneAsync(e => e.Id == id);
         return result.DeletedCount > 0;

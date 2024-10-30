@@ -30,7 +30,7 @@ public class StedsEventService : IStedsEventService
         }
     }
 
-    public async Task<StedsEvent?> GetStedsEventById(ObjectId id)
+    public async Task<StedsEvent?> GetStedsEventById(string id)
     {
         try
         {
@@ -57,7 +57,7 @@ public class StedsEventService : IStedsEventService
             _logger.LogInformation("Creating event");
             StedsEvent newEvent = new StedsEvent
             {
-                Id = ObjectId.GenerateNewId(),
+                Id = ObjectId.GenerateNewId().ToString(),
                 CreatedOn = DateTime.Now,
                 Title = stedsEvent.Title,
                 Description = stedsEvent.Description,
@@ -101,7 +101,7 @@ public class StedsEventService : IStedsEventService
         }
     }
 
-    public async Task<bool> DeleteStedsEvent(ObjectId id)
+    public async Task<bool> DeleteStedsEvent(string id)
     {
         try
         {

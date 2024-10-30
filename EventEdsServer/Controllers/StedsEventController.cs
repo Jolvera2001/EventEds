@@ -30,13 +30,8 @@ public class StedsEventController : ControllerBase
     public async Task<IActionResult> GetStedsEvent(string eventId)
     {
         _logger.LogInformation($"Get StedsEvent {eventId}");
-        if (!ObjectId.TryParse(eventId, out ObjectId objectId))
-        {
-            _logger.LogWarning($"Invalid eventId {eventId}");
-            return BadRequest("Invalid Id format");
-        }
         
-        var stedsEvent = await _stedsEventService.GetStedsEventById(objectId);
+        var stedsEvent = await _stedsEventService.GetStedsEventById(eventId);
         return Ok(stedsEvent);
     }
 
@@ -66,13 +61,8 @@ public class StedsEventController : ControllerBase
     public async Task<IActionResult> DeleteStedsEvent(string eventId)
     {
         _logger.LogInformation($"Delete StedsEvent {eventId}");
-        if (!ObjectId.TryParse(eventId, out ObjectId objectId))
-        {
-            _logger.LogWarning($"Invalid eventId {eventId}");
-            return BadRequest("Invalid Id format");
-        }
         
-        var res = await _stedsEventService.DeleteStedsEvent(objectId);
+        var res = await _stedsEventService.DeleteStedsEvent(eventId);
 
         if (res)
         {

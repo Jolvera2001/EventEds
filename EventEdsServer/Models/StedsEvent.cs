@@ -8,7 +8,7 @@ namespace EventEdsServer.Models;
 public class StedsEvent
 {
     [BsonId]
-    public ObjectId Id { get; set; }
+    public string Id { get; set; }
     
     [BsonElement("created_on")]
     public DateTime CreatedOn { get; set; }
