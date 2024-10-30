@@ -8,6 +8,11 @@
       - "8080:8080"
     environment:
       - MONGO_URI=${MONGO_URI}
+    networks:
+      - event-network
+    depends_on:
+      - mongodb
+      
   mongodb:
     image: mongodb/mongodb-community-server:latest
     environment:
@@ -18,6 +23,12 @@
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - event-network
+
+networks:
+  event-network:
+    driver: bridge
       
 volumes:
   mongodb_data:

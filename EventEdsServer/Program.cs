@@ -13,14 +13,15 @@ DotEnv.Load();
 builder.Services.AddDbContext<MongoContext>(options =>
 {
     var mongoUri = Environment.GetEnvironmentVariable("MONGO_URI");
-    if (mongoUri != null)
+    if (mongoUri == null)
     {
         Console.WriteLine("MongoDB Uri not set!");
         Environment.Exit(0);
     }
     
+    var mongoUrl = new MongoUrl(mongoUri);
     var client = new MongoClient(mongoUri);
-    var database = client.GetDatabase("main");
+    var database = client.GetDatabase(mongoUrl.DatabaseName ?? "main");
     
     options.UseMongoDB(client, database.DatabaseNamespace.DatabaseName);
 });
