@@ -83,13 +83,31 @@ onMounted(() => {
   })
 })
 
+const handleCancel = () => {
+  eventData.title = ''
+  eventData.description = ''
+  eventData.datetime = null
+  eventData.location = {
+    type: 'Point',
+    coordinates: []
+  }
+}
+
 const handleSubmit = async () => {
   try {
     isLoading.value = true
     console.log("Submitting...", eventData)
+    console.log("This should submit to the event api")
   } catch (e) {
     console.error(e)
   } finally {
+    eventData.title = ''
+    eventData.description = ''
+    eventData.datetime = null
+    eventData.location = {
+      type: 'Point',
+      coordinates: []
+    }
     isLoading.value = false
   }
 }
@@ -130,13 +148,21 @@ const handleSubmit = async () => {
           Selected Location: {{ eventData.location.coordinates[0].toFixed(6) }},
           {{ eventData.location.coordinates[1].toFixed(6) }}
         </div>
-        <Button 
-            @click="handleSubmit"
-            :loading="isLoading"
-            class="mt-2"
-        >
-          Create
-        </Button>
+        <div class="flex flex-row justify-between gap-4">
+          <Button 
+              @click="handleSubmit"
+              :loading="isLoading"
+              class="flex-1 mt-2"
+          >
+            Create
+          </Button>
+          <Button
+              @click="handleCancel"
+              class="flex-1 mt-2"
+          >
+            cancel
+          </Button>
+        </div>
       </div>
     </template>
   </Card>
