@@ -101,12 +101,13 @@ public class StedsEventService : IStedsEventService
         }
     }
 
-    public async Task DeleteStedsEvent(ObjectId id)
+    public async Task<bool> DeleteStedsEvent(ObjectId id)
     {
         try
         {
             _logger.LogInformation("Deleting event");
             var result = await _eventCrud.DeleteEventAsync(id);
+            return result;
         }
         catch (Exception ex)
         {

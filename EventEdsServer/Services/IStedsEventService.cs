@@ -9,5 +9,5 @@ public interface IStedsEventService
     public Task<StedsEvent?> GetStedsEventById(ObjectId id);
     public Task<StedsEvent?> CreateStedsEvent(StedsEventDto stedsEvent);
     public Task<StedsEvent?> UpdateStedsEvent(StedsEvent stedsEvent);
-    public Task DeleteStedsEvent(ObjectId id);
+    public Task<bool> DeleteStedsEvent(ObjectId id);
 }

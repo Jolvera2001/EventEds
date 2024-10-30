@@ -1,6 +1,8 @@
 using dotenv.net;
 using EventEdsServer.Repository;
 using EventEdsServer.Repository.Crud;
+using EventEdsServer.Services;
+using EventEdsServer.Services.Implementations;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 
@@ -41,6 +43,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IStedsEventCrud, StedsStedsEventCrud>();
 
 // services
+builder.Services.AddScoped<IStedsEventService, StedsEventService>();
 
 var app = builder.Build();
 
