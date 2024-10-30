@@ -8,9 +8,6 @@ import InputText from 'primevue/inputtext';
 import FloatLabel from 'primevue/floatlabel';
 import Textarea from 'primevue/textarea';
 
-
-
-
 export default function registerComponents(app: App) {
     app.component('Button', Button);
     app.component('DatePicker', DatePicker);
