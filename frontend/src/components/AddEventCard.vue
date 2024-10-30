@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue';
+import {ref, reactive, onMounted, computed} from 'vue';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -93,6 +93,13 @@ const handleCancel = () => {
   }
 }
 
+const isFormValid = computed(() => {
+  return eventData.title.trim() !== '' &&
+      eventData.description.trim() !== '' &&
+      eventData.datetime !== null &&
+      eventData.location.coordinates.length === 2;
+});
+
 const handleSubmit = async () => {
   try {
     isLoading.value = true
@@ -152,16 +159,18 @@ const handleSubmit = async () => {
           <Button 
               @click="handleSubmit"
               :loading="isLoading"
+              :disabled="!isFormValid"
               class="flex-1 mt-2"
-          >
-            Create
-          </Button>
+              label="Create"
+              raised
+          />
           <Button
               @click="handleCancel"
               class="flex-1 mt-2"
-          >
-            cancel
-          </Button>
+              label="Cancel"
+              severity="danger"
+              raised
+          />
         </div>
       </div>
     </template>
