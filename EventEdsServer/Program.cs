@@ -2,12 +2,19 @@ using dotenv.net;
 using EventEdsServer;
 using EventEdsServer.Services;
 using EventEdsServer.Services.Implementations;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 DotEnv.Load();
 
+var connectionString = Environment.GetEnvironmentVariable("MYSQL_CONNECTION_STRING");
+
 builder.Services.AddDbContext<MySqlContext>(options =>
-    options)
+    options.UseMySql(
+        connectionString,
+        ServerVersion.AutoDetect(connectionString)
+    )
+);
 
 // CORS for local development
 builder.Services.AddCors(options =>
