@@ -7,58 +7,23 @@ namespace EventEdsServer.Models;
 
 public class StedsEvent
 {
-    [BsonId]
-    public string Id { get; set; }
-    
-    [BsonElement("created_on")]
+    public Guid Id { get; set; }
     public DateTime CreatedOn { get; set; }
-    
-    [BsonElement("title")]
     public string Title { get; set; }
-    
-    [BsonElement("description")]
     public string Description { get; set; }
-    
-    [BsonElement("start_date")]
     public DateTime StartDate { get; set; }
-    
-    [BsonElement("end_date")]
     public DateTime EndDate { get; set; } 
     
-    [BsonElement("location")]
-    public GeoJsonPoint<GeoJson2DGeographicCoordinates> Location { get; set; }
+    // relationship
+    public Location Location { get; set; }
+    public Guid LocationId { get; set; }
 }
 
 public class StedsEventDto
 {
-    [Required]
+    public DateTime CreatedOn { get; set; }
     public string Title { get; set; }
-    
-    [Required]
     public string Description { get; set; }
-    
-    [Required]
     public DateTime StartDate { get; set; }
-    
-    [Required]
-    public DateTime EndDate { get; set; }
-
-    [Required] 
-    public LocationDto Location { get; set; } = null!;
-
-    public GeoJsonPoint<GeoJson2DGeographicCoordinates> ToLocation()
-    {
-        return new GeoJsonPoint<GeoJson2DGeographicCoordinates>(
-            new GeoJson2DGeographicCoordinates(
-                Location.Coordinates[0],
-                Location.Coordinates[1]
-                )
-            );
-    }
-}
-
-public class LocationDto
-{
-    public string Type { get; set; } = "Point";
-    public double[] Coordinates { get; set; } = null!;
+    public DateTime EndDate { get; set; } 
 }

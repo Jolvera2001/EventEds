@@ -1,24 +1,13 @@
 using dotenv.net;
-using EventEdsServer.Repository;
-using EventEdsServer.Repository.Crud;
+using EventEdsServer;
 using EventEdsServer.Services;
 using EventEdsServer.Services.Implementations;
-using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 DotEnv.Load();
 
-// db context
-var mongoUri = Environment.GetEnvironmentVariable("MONGO_URI");
-if (string.IsNullOrEmpty(mongoUri))
-{
-    Console.WriteLine("MongoDB Uri not set!");
-    Environment.Exit(0);
-}
-
-var settings = MongoClientSettings.FromUrl(new MongoUrl(mongoUri));
-builder.Services.AddSingleton<IMongoClient>(new MongoClient(settings));
+builder.Services.AddDbContext<MySqlContext>(options =>
+    options)
 
 // CORS for local development
 builder.Services.AddCors(options =>
@@ -33,9 +22,6 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 builder.Services.AddControllers();
-
-// crud
-builder.Services.AddScoped<IStedsEventCrud, StedsStedsEventCrud>();
 
 // services
 builder.Services.AddScoped<IStedsEventService, StedsEventService>();
