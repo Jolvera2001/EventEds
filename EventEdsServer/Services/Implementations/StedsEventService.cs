@@ -1,5 +1,6 @@
 using EventEdsServer.Models;
 using EventEdsServer.Repository;
+using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
 
 namespace EventEdsServer.Services.Implementations;
@@ -15,13 +16,17 @@ public class StedsEventService : IStedsEventService
         _logger = logger;
     }
     
-    public async Task<List<StedsEvent>> GetStedsEvents()
+    public async Task<List<StedsEvent>> GetStedsEvents(int page, int pageSize)
     {
         try
         {
             _logger.LogInformation("Retrieving events");
-            var result = await _eventCrud.GetAllEventsAsync();
-            return result;
+            return await _context.Events
+                .Include(e => e.Location)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
         }
         catch (Exception ex)
         {

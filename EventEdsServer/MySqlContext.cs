@@ -7,6 +7,6 @@ public class MySqlContext : DbContext
 {
     public MySqlContext(DbContextOptions<MySqlContext> options) : base(options) { }
     
-    DbSet<StedsEvent> Events { get; set; }
-    DbSet<Location> Locations { get; set; }
+    public DbSet<StedsEvent> Events { get; set; }
+    public DbSet<Location> Locations { get; set; }
 }
