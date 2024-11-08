@@ -6,12 +6,12 @@ namespace EventEdsServer.Services.Implementations;
 
 public class StedsEventService : IStedsEventService
 {
-    private readonly IStedsEventCrud _eventCrud;
+    private readonly MySqlContext _context;
     private readonly ILogger<StedsEventService> _logger;
 
-    public StedsEventService(IStedsEventCrud eventCrud, ILogger<StedsEventService> logger)
+    public StedsEventService(MySqlContext context, ILogger<StedsEventService> logger)
     {
-        _eventCrud = eventCrud;
+        _context = context;
         _logger = logger;
     }
     
@@ -30,18 +30,12 @@ public class StedsEventService : IStedsEventService
         }
     }
 
-    public async Task<StedsEvent?> GetStedsEventById(string id)
+    public async Task<StedsEvent?> GetStedsEventById(Guid id)
     {
         try
         {
             _logger.LogInformation("Retrieving event by id");
-            var stedsEvent = await _eventCrud.GetEventByIdAsync(id);
-            if (stedsEvent == null)
-            {
-                return null;
-            }
-
-            return stedsEvent;
+            
         }
         catch (Exception ex)
         {
@@ -55,24 +49,7 @@ public class StedsEventService : IStedsEventService
         try
         {
             _logger.LogInformation("Creating event");
-            StedsEvent newEvent = new StedsEvent
-            {
-                Id = ObjectId.GenerateNewId().ToString(),
-                CreatedOn = DateTime.Now,
-                Title = stedsEvent.Title,
-                Description = stedsEvent.Description,
-                StartDate = stedsEvent.StartDate,
-                EndDate = stedsEvent.EndDate,
-                Location = stedsEvent.ToLocation()
-            };
-            var result = await _eventCrud.CreateEventAsync(newEvent);
-
-            if (result == null)
-            {
-                return null;
-            }
-
-            return result;
+           
         }
         catch (Exception ex)
         {
@@ -86,13 +63,6 @@ public class StedsEventService : IStedsEventService
         try
         {
             _logger.LogInformation("Updating event");
-            var result = await _eventCrud.UpdateEventAsync(stedsEvent);
-            if (result == null)
-            {
-                return null;
-            }
-
-            return result;
         }
         catch (Exception ex)
         {
@@ -100,14 +70,14 @@ public class StedsEventService : IStedsEventService
             throw;
         }
     }
+    
 
-    public async Task<bool> DeleteStedsEvent(string id)
+    public async Task<bool> DeleteStedsEvent(Guid id)
     {
         try
         {
             _logger.LogInformation("Deleting event");
-            var result = await _eventCrud.DeleteEventAsync(id);
-            return result;
+            
         }
         catch (Exception ex)
         {
