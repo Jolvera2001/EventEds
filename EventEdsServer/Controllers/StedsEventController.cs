@@ -1,7 +1,6 @@
 using EventEdsServer.Models;
 using EventEdsServer.Services;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 
 namespace EventEdsServer.Controllers;
 
@@ -19,15 +18,15 @@ public class StedsEventController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetStedsEvents()
+    public async Task<IActionResult> GetStedsEvents(int page = 1, int pageSize = 10)
     {
         _logger.LogInformation("Get StedsEvents");
-        var events = await _stedsEventService.GetStedsEvents();
+        var events = await _stedsEventService.GetStedsEvents(page, pageSize);
         return Ok(events);
     }
 
     [HttpGet("{eventId}")]
-    public async Task<IActionResult> GetStedsEvent(string eventId)
+    public async Task<IActionResult> GetStedsEvent(Guid eventId)
     {
         _logger.LogInformation($"Get StedsEvent {eventId}");
         
@@ -51,14 +50,21 @@ public class StedsEventController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateStedsEvent(StedsEventDto stedsEvent)
+    public async Task<IActionResult> UpdateStedsEvent(Guid id, StedsEvent stedsEvent)
     {
         _logger.LogInformation($"Update StedsEvent {stedsEvent}");
-        return Ok();
+        var result = await _stedsEventService.UpdateStedsEvent(id, stedsEvent);
+
+        if (result == null)
+        {
+            return BadRequest("StedsEvent not updated");
+        }
+        
+        return Ok(result);
     }
 
     [HttpDelete("{eventId}")]
-    public async Task<IActionResult> DeleteStedsEvent(string eventId)
+    public async Task<IActionResult> DeleteStedsEvent(Guid eventId)
     {
         _logger.LogInformation($"Delete StedsEvent {eventId}");
         
