@@ -1,7 +1,40 @@
-<div>
-    <p>Hello World!</p>
-</div>
-
-@code {
-    
-}
+<Card Title="Add a New Event" Class="w-2/5">
+    <ChildContent>
+        <Flex>
+            <Form Model="@_formModel">
+                <FormItem Label="Title">
+                    <Input @bind-Value="@context.Title"
+                           placeholder="Title" />
+                </FormItem >
+                <FormItem Label="Description">
+                    <TextArea @bind-Value="@context.Description" 
+                              placeholder="Description"/>
+                </FormItem>
+                <FormItem Label="Day">
+                    <DatePicker
+                        @bind-Value="@context.EventDay"
+                        Format="dd/MM/yyyy"
+                        TValue="DateTime"/>
+                </FormItem>
+                <FormItem Label="Start Time">
+                    <TimePicker
+                        @bind-Value="@context.StartTime"
+                        Format="hh:mm tt"/>
+                </FormItem>
+                <FormItem Label="End Time">
+                    <TimePicker
+                        @bind-Value="@context.EndTime"
+                        Format="hh:mm tt"/>
+                </FormItem>
+                <FormItem>
+                    <Button Type="@ButtonType.Primary" HtmlType="submit">
+                        Submit
+                    </Button>    
+                </FormItem>
+                <FormItem>
+                    <div id="map"></div>
+                </FormItem>
+            </Form>
+        </Flex>
+    </ChildContent>
+</Card>
