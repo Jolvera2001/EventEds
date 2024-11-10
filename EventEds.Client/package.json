@@ -1,6 +1,13 @@
 {
+  "name": "eventends-client",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "css:watch": "tailwindcss -i ./Styles/input.css -o ./wwwroot/css/output.css --watch",
+    "css:build": "tailwindcss -i ./Styles/input.css -o ./wwwroot/css/output.css --minify"
+  },
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "tailwindcss": "^3.4.14"
+    "tailwindcss": "^3.3.5",
+    "cross-env": "^7.0.3"
   }
 }
