@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventEds.Client", "EventEds.Client\EventEds.Client.csproj", "{4EB25916-A94A-458A-8E78-64DA329BE14D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,5 +19,9 @@ Global
 		{E97AED8E-1793-46B3-A921-F34D141FED28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E97AED8E-1793-46B3-A921-F34D141FED28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E97AED8E-1793-46B3-A921-F34D141FED28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EB25916-A94A-458A-8E78-64DA329BE14D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EB25916-A94A-458A-8E78-64DA329BE14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EB25916-A94A-458A-8E78-64DA329BE14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EB25916-A94A-458A-8E78-64DA329BE14D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
